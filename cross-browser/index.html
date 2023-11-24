@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>cross-browser</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #box {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 120px;
+      height: 120px;
+      line-height: 120px;
+      text-align: center;
+      color: #fff;
+      font-size: 18px;
+      background-color: orange;
+      border-radius: 50%;
+      user-select: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box"> Move Me </div>
+  <script>
+    const box = document.querySelector('#box')
+    const channel = new BroadcastChannel('BroadcastChannel')
+
+    channel.onmessage = function (event) {
+      console.log('Received message from Page 2:', event.data);
+      const { boxTop, boxLeft } = event.data
+      box.style.top = `${boxTop}px`;
+      box.style.left = `${boxLeft + 639}px`;
+    }
+
+    const windowDetails = {
+      screenX: window.screenX,
+      screenY: window.screenY,
+      screenWidth: window.screen.availWidth,
+      screenHeight: window.screen.availHeight,
+      width: window.outerWidth,
+      height: window.innerHeight,
+      updated: Date.now(),
+    };
+    console.log(windowDetails)
+
+    window.addEventListener('resize', function () {
+      // 在窗口大小变化时执行的操作
+      console.log('浏览器窗口被拖动')
+    })
+    // setInterval(() => {
+    //   console.log({
+    //     screenX: window.screenX,
+    //     screenY: window.screenY,
+    //     screenWidth: window.screen.availWidth,
+    //     screenHeight: window.screen.availHeight,
+    //     width: window.outerWidth,
+    //     height: window.innerHeight,
+    //     updated: Date.now(),
+    //   })
+    // }, 1000 / 60)
+
+    let initialX, initialY;
+    function drag(ev) {
+      const offsetX = ev.clientX - initialX;
+      const offsetY = ev.clientY - initialY;
+      const moveX = box.offsetLeft + offsetX
+      const moveY = box.offsetTop + offsetY
+      box.style.left = `${moveX}px`;
+      box.style.top = `${moveY}px`;
+
+      initialX = ev.clientX;
+      initialY = ev.clientY;
+
+      channel.postMessage({
+        boxTop: moveY,
+        boxLeft: moveX,
+      });
+
+
+    }
+
+    function dragEnd() {
+      document.removeEventListener('mousemove', drag);
+      document.removeEventListener('mouseup', dragEnd);
+    }
+
+    function dragStart(ev) {
+      initialX = ev.clientX;
+      initialY = ev.clientY;
+      document.addEventListener('mousemove', drag);
+      document.addEventListener('mouseup', dragEnd);
+    }
+
+    box.addEventListener('mousedown', dragStart)
+
+
+  </script>
+</body>
+
+</html>
