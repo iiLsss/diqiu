@@ -1,0 +1,11 @@
+# 使用官方 Node.js 镜像作为基础
+FROM node:latest
+
+# 设置工作目录
+WORKDIR /app
+
+# 将应用程序文件复制到工作目录
+COPY . .
+
+# 暴露应用程序运行的端口
+EXPOSE 3000
