@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    .container{
+      margin: 0 auto;
+      margin-top: 100px;
+      width: 500px;
+      height: 300px;
+      overflow: auto;
+    }
+    .table{
+      width: 100%;
+      table-layout: fixed;
+      border-spacing: 0;
+    }
+    .table-cell{
+      padding: 12px 0;
+      padding-left: 4px;
+      width: 120px;
+      color: rgba(0, 0, 0, 0.5);
+      font-weight: 400;
+      text-align: left;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      font-size: 12px;
+    }
+
+    .table-cell-fix-left {
+      position: sticky;
+      width: 90px;
+      left: 0;
+      z-index: 1;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.7);
+      background: #fff;
+    }
+    .table-cell-fix-left::after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: -1px;
+      width: 30px;
+      pointer-events: none;
+      content: "";
+      box-shadow: inset 10px 0 8px -10px #00000026;
+      transition: box-shadow 0.3s;
+      transform: translate(100%);
+    }
+
+    .table thead .table-cell {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      text-align: left;
+      background: #fff;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    .table thead .table-cell::before{
+      position: absolute;
+      right: 0;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 30px;
+      pointer-events: none;
+      content: "";
+      box-shadow: inset 0 6px 8px -10px #00000026;
+      transition: box-shadow 0.3s;
+      transform: translateY(100%);
+    }
+    .table thead .table-cell-fix-left {
+      z-index: 3;
+    }
+
+      
+
+  </style>
+</head>
+<body>
+  
+  <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="table-cell table-cell-fix-left">产品型号</th>
+          <th class="table-cell">mac pro a</th>
+          <th class="table-cell">mac pro b</th>
+          <th class="table-cell">mac pro c</th>
+          <th class="table-cell">mac pro d</th>
+          <th class="table-cell">mac pro e</th>
+          <th class="table-cell">mac pro f</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th class="table-cell table-cell-fix-left">屏幕参数</th>
+          <th class="table-cell">110英寸</th>
+          <th class="table-cell">120英寸</th>
+          <th class="table-cell">130英寸</th>
+          <th class="table-cell">140英寸</th>
+          <th class="table-cell">150英寸</th>
+          <th class="table-cell">160英寸</th>
+        </tr>
+        <tr>
+          <th class="table-cell table-cell-fix-left">芯片参数</th>
+          <th class="table-cell">Intel® Core™ i1 </th>
+          <th class="table-cell">Intel® Core™ i3 </th>
+          <th class="table-cell">Intel® Core™ i4 </th>
+          <th class="table-cell">Intel® Core™ i7 </th>
+          <th class="table-cell">Intel® Core™ i9 </th>
+          <th class="table-cell">Intel® Core™ i11 </th>
+        </tr>
+        <tr>
+          <th class="table-cell table-cell-fix-left">触控参数</th>
+          <th class="table-cell">1指</th>
+          <th class="table-cell">3指</th>
+          <th class="table-cell">5指</th>
+          <th class="table-cell">7指</th>
+          <th class="table-cell">9指</th>
+          <th class="table-cell">无限</th>
+        </tr>
+        <tr>
+          <th class="table-cell table-cell-fix-left">电池容易</th>
+          <th class="table-cell">10000毫安</th>
+          <th class="table-cell">20000毫安</th>
+          <th class="table-cell">30000毫安</th>
+          <th class="table-cell">40000毫安</th>
+          <th class="table-cell">50000毫安</th>
+          <th class="table-cell">50000毫安</th>
+        </tr>
+        <tr>
+          <th class="table-cell table-cell-fix-left">续航时长</th>
+          <th class="table-cell">14h</th>
+          <th class="table-cell">24h</th>
+          <th class="table-cell">34h</th>
+          <th class="table-cell">44h</th>
+          <th class="table-cell">54h</th>
+          <th class="table-cell">64h</th>
+        </tr>
+        <tr>
+          <th class="table-cell table-cell-fix-left">接口数量</th>
+          <th class="table-cell">8</th>
+          <th class="table-cell">8</th>
+          <th class="table-cell">8</th>
+          <th class="table-cell">8</th>
+          <th class="table-cell">8</th>
+          <th class="table-cell">8</th>
+        </tr>
+        <tr>
+          <th class="table-cell table-cell-fix-left">轮毂型号</th>
+          <th class="table-cell">19寸</th>
+          <th class="table-cell">19寸</th>
+          <th class="table-cell">19寸</th>
+          <th class="table-cell">19寸</th>
+          <th class="table-cell">23寸</th>
+          <th class="table-cell">23寸</th>
+        </tr>
+        <tr>
+          <th class="table-cell table-cell-fix-left">电动尾翼</th>
+          <th class="table-cell">/</th>
+          <th class="table-cell">/</th>
+          <th class="table-cell">可选</th>
+          <th class="table-cell">可选</th>
+          <th class="table-cell">标配</th>
+          <th class="table-cell">标配</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
